@@ -110,7 +110,7 @@ def main():
     elif module.params["name"]:
         rules = qradar_request.get(
             "/api/analytics/rules?filter={0}".format(
-                quote('"{0}"'.format(module.params["name"]))
+                quote('name="{0}"'.format(module.params["name"]))
             )
         )
         if rules:

@@ -1,4 +1,5 @@
 ---
+### By ID
 - name: get info about qradar offense
   rule_info:
     name: "Service DoS Attack Detected"
@@ -53,3 +54,52 @@
     that:
       - disable_rule_by_id_again is not changed
       - disable_rule_by_id_again is not failed
+
+### By Name 
+- name: enable rule by name
+  rule:
+    state: enabled
+    name: "Service DoS Attack Detected"
+  register: enable_rule_by_name
+
+- name: ensure enable rule by name
+  assert:
+    that:
+      - enable_rule_by_name is changed
+      - enable_rule_by_name is not failed
+
+- name: enable rule by name again
+  rule:
+    state: enabled
+    name: "Service DoS Attack Detected"
+  register: enable_rule_by_name_again
+
+- name: ensure enable rule by name again
+  assert:
+    that:
+      - enable_rule_by_name_again is not changed
+      - enable_rule_by_name_again is not failed
+
+- name: disable rule by name
+  rule:
+    state: disabled
+    name: "Service DoS Attack Detected"
+  register: disable_rule_by_name
+
+- name: ensure disable rule by name
+  assert:
+    that:
+      - disable_rule_by_name is changed
+      - disable_rule_by_name is not failed
+
+- name: disable rule by name again
+  rule:
+    state: disabled
+    name: "Service DoS Attack Detected"
+  register: disable_rule_by_name_again
+
+- name: ensure disable rule by name again
+  assert:
+    that:
+      - disable_rule_by_name_again is not changed
+      - disable_rule_by_name_again is not failed
